@@ -43,6 +43,7 @@ CONFIGURE_ARGS += --with-pic
 MAKE_PATH:=ndpi-netfilter
 
 MAKE_FLAGS += \
+	ARCH="$(LINUX_KARCH)" \
 	KERNEL_DIR="$(LINUX_DIR)" \
 	MODULES_DIR="$(TARGET_MODULES_DIR)" \
 	NDPI_PATH=$(PKG_BUILD_DIR)/ndpi-netfilter
@@ -62,7 +63,8 @@ endef
 define KernelPackage/ipt-ndpi
   SUBMENU:=Netfilter Extensions
   TITLE:= nDPI net netfilter module
-  DEPENDS:=+kmod-nf-conntrack +kmod-nf-conntrack-netlink +kmod-ipt-compat-xtables +kmod-ipt-conntrack-label
+  #DEPENDS:=+kmod-nf-conntrack +kmod-nf-conntrack-netlink +kmod-ipt-compat-xtables +kmod-ipt-conntrack-label
+  DEPENDS:=+kmod-nf-conntrack +kmod-nf-conntrack-netlink +kmod-ipt-compat-xtables
   FILES:= \
 	$(PKG_BUILD_DIR)/ndpi-netfilter/src/xt_ndpi.ko
   AUTOLOAD:=$(call AutoProbe,xt_ndpi)
